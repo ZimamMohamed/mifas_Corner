@@ -7,10 +7,11 @@
 /* ---------- Tokens ---------- */
 :root {
   --white: #fff;
-  --paper: #f4f4f2;
-  --ink: #000;
+  --red: #db0406;        /* brand secondary: logo red */
+  --paper: #f3f5fa;
+  --ink: #061b46;        /* brand primary: logo navy */
   --muted: #595959;
-  --line: #d9d9d6;
+  --line: #d8deea;
 
   --serif: "Instrument Serif", "Times New Roman", Georgia, serif;
   --sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -352,3 +353,63 @@ h3 { font-size: 1.75rem; line-height: 1.1; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- Brand watermark ----------
+   Faint Mifas Corner logo (pre-faded PNG) tiled on every white area.
+   Paper-coloured sections stay plain. Tune strength by regenerating
+   img/logo-watermark.png, or change the tile size below. */
+.hero,
+.section:not(.section--paper),
+.site-footer,
+.contact-form {
+  background-image: url("img/logo-watermark.png");
+  background-repeat: repeat;
+  background-size: 1000px auto;
+  background-position: center top;
+}
+@media (max-width: 700px) {
+  .hero,
+  .section:not(.section--paper),
+  .site-footer,
+  .contact-form { background-size: 640px auto; }
+}
+
+/* ---------- Brand colours: navy (primary) + red (secondary) ----------
+   --ink is the logo navy. --red is the logo red, used for accents. */
+.site-header { border-top: 4px solid var(--red); border-bottom: 1px solid var(--line); box-shadow: 0 1px 0 var(--ink); }
+.logo-mark { border-top-color: var(--red); border-left-color: var(--red); }
+.logo-mark::after { background: var(--ink); }
+.logo-text { color: var(--ink); }
+.site-nav a::after { background: var(--red); }
+.hero h1 { color: var(--ink); }
+.hero-kicker { color: var(--red); font-weight: 600; }
+.frame::before { border-color: var(--red); }
+.frame::after { border-color: var(--ink); }
+
+.btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+.btn--outline { border-color: var(--ink); }
+.btn--outline:hover { background: var(--red); border-color: var(--red); }
+.text-link:hover { color: var(--red); }
+.header-wa:hover { background: var(--red); border-color: var(--red); }
+.cat:hover .cat-link { background: var(--red); }
+.chip:hover { border-color: var(--red); color: var(--red); }
+.chip.is-active { background: var(--red); border-color: var(--red); color: var(--white); }
+
+.section-head { border-top: 1px solid var(--ink); position: relative; }
+.section-head::before { content: ""; position: absolute; top: -3px; left: 0; width: 4.5rem; height: 5px; background: var(--red); }
+.promo { border-block: 1px solid var(--line); }
+.section--paper { border-top: 3px solid var(--ink); }
+.site-footer { border-top: 4px solid var(--red); background-color: var(--ink); color: var(--white); }
+.site-footer .logo-text, .site-footer .footer-title { color: var(--white); }
+.site-footer .footer-brand p, .site-footer li a, .footer-bottom { color: #c9d1e3; }
+.site-footer li a:hover { color: var(--white); text-decoration-color: var(--red); }
+.footer-bottom { border-top-color: rgba(255,255,255,.18); }
+.site-footer .logo-mark { border-color: var(--red); }
+.site-footer .logo-mark::after { background: var(--white); }
+.wa-float:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+::selection { background: var(--red); color: var(--white); }
+.site-footer { background-image: none; }
+
+/* ---------- Inner shadow (bottom edge fading upward) ---------- */
+.site-header { box-shadow: inset 0 -16px 18px -14px rgba(6, 27, 70, .35); }
+.hero { box-shadow: inset 0 -90px 70px -60px rgba(6, 27, 70, .20); }
